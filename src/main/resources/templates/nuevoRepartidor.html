@@ -1,0 +1,69 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Repartidor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <style>
+        .container {
+            min-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark w-100">
+        <div class="container-fluid">
+          <a class="navbar-brand fs-2" href="#">Nuevo Repartidor</a>
+          <div class="d-flex">
+            <a href="/repartidores" class="btn btn-primary me-2">Repartidores</a>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="" method="post">
+                    <div class="form-group mt-5">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" class="form-control" name="nombreRepartidor" id="nombreRepartidor" placeholder="Ingrese su nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="dni">DNI</label>
+                        <input type="text" class="form-control" name="dniRepartidor" id="dniRepartidor" placeholder="Ingrese su DNI">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" class="form-control" name="telefonoRepartidor" id="telefonoRepartidor"
+                            placeholder="Ingrese su número de teléfono">
+                    </div>
+                    <div class="form-group">
+                        <label for="cocheRepartidor">Coche</label>
+                        <div>
+                            <select name="cocheRepartidor" id="cocheRepartidor" required class="form-control">
+                                <option value="sincoche">Sin Coche Principal</option>
+                                <option th:each="coches : ${coches}" th:value="${coches.nombreCoche}"
+                                    th:text="${coches.nombreCoche}" th:selected="false" />
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-2 text-end">
+                        <a href="/" class="btn btn-primary">Volver</a>
+                        <button class="btn btn-primary">Guardar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

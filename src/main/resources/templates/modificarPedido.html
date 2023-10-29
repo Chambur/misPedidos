@@ -1,0 +1,110 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <style>
+        .container {
+            min-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark w-100">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-2" href="#">Modificar Pedido</a>
+            <div class="d-flex">
+                <a href="/" class="btn btn-primary me-2">Pedidos</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- <ul>
+            <li th:each="elementos : ${registro}" th:text="${elementos}"></li>
+        </ul> -->
+
+        <form action="/modificar/guardar" method="POST">
+          <input type="hidden" name="id" th:value="${registro.id}" />
+
+          <div class="mb-2 mt-5">
+            <label for="nombre">Destinatario</label>
+            <div>
+                <select name="nombre" id="nombre" required class="form-control">
+                    <option th:each="cliente : ${clientes}"
+                            th:value="${cliente.nombrecliente}"
+                            th:text="${cliente.nombrecliente}"
+                            th:selected="${cliente.nombrecliente == registro.nombre}">
+                    </option>
+                </select>
+            </div>
+        </div>
+
+         <div class="mb-2">
+            <label for="fecha">Fecha</label>
+                   <input type="datetime-local" id="fechaPedido" name="fechaPedido" class="form-control"
+                   th:value="${registro.fechaPedido}" />
+            
+        </div>  
+          
+
+        <div class="mb-2">
+            <label for="repartidor">Repartidor</label>
+            <div>
+                <select name="repartidor" id="repartidor" required class="form-control">
+                    <option th:each="repartidores : ${repartidores}"
+                        th:value="${repartidores.idRepartidor}"
+                        th:text="${repartidores.nombreRepartidor}"
+                        th:selected="${registro.repartidor != null and repartidores.nombreRepartidor == registro.repartidor.nombreRepartidor} ? 'selected' : ''" />
+
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="coches">Coches</label>
+            <div>
+                <select name="coche" id="coche" required class="form-control">
+                    <option th:each="coches : ${coches}" th:value="${coches.idCoches}"
+                        th:text="${coches.nombreCoche}" 
+                        th:selected="${coches.nombreCoche == registro.coche.nombreCoche}"
+                        />
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="peso">Peso</label>
+            <select name="peso" id="peso" class="form-control">
+                <option value="1/2kg" th:selected="${registro.peso == '1/2kg'}">1/2kg</option>
+                <option value="1kg" th:selected="${registro.peso == '1kg'}">1kg</option>
+                <option value="2kg" th:selected="${registro.peso == '2kg'}">2kg</option>
+            </select>
+            
+        </div>
+        <div class="mb-2">
+            <label for="cantidad">Cantidad </label>
+            <input type="text" id="cantidad" name="cantidad" th:value="${registro.cantidad}" /><br>
+        </div>
+
+        <div class="mb-2 text-end">
+            <button class="btn btn-primary">Guardar</button>
+
+        </div>
+    </form>
+</div>
+        
+
+</body>
+
+</html>

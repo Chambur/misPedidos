@@ -1,0 +1,85 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Pedidos - Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  <style>
+    .container {
+      min-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark bg-dark w-100">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-2" href="#">Mis Pedidos</a>
+      <div class="d-flex">
+        <a href="/repartidores" class="btn btn-primary me-2">Repartidores</a>
+        <a href="/coches" class="btn btn-primary me-2">Coches</a>
+        <a href="/clientes" class="btn btn-primary me-2">Clientes</a>
+        <a href="/pedidos/nuevopedido" class="btn btn-primary me-2">Nuevo Pedido</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <table class="table table-hover m-3">
+      <thead>
+        <tr>
+          <th class="col col-1">ID</th>
+          <th class="col col-1">Destinatario</th>
+          <th class="col col-1">Fecha Pedido</th>
+          <th class="col col-1">Repartidor</th>
+          <th class="col col-1">Peso</th>
+          <th class="col col-1">Cantidad</th>
+          <th class="col col-1">Registro</th>
+          <th class="col col-1">Coche</th>
+
+          <th class="col col-1 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="pedido : ${pedidos}">
+          <td th:text="${pedido.id}"></td>
+          <td th:text="${pedido.nombre}"></td>
+          <td th:text="${#temporals.format(pedido.fechaPedido, 'dd-MM-yyyy HH:mm')}"></td>
+          <td th:text="${pedido.repartidor != null ? pedido.repartidor.nombreRepartidor : 'Repartidor ELIMINADO'}"></td>
+          <td th:text="${pedido.peso}"></td>
+          <td th:text="${pedido.cantidad}"></td>
+          <td th:text="${#temporals.format(pedido.fechaRegistro, 'dd-MM-yyyy')}"></td>
+          <td th:text="${pedido.coche.nombreCoche}"></td>
+
+          <!-- <tr th:each="repartidores : ${repartidores} ">
+            <td th:text="${repartidores.nombreRepartidor}"></td>
+          </tr> -->
+          <td class="text-center">
+            <div class="btn-group" role="group">
+              <form action="/eliminar" method="POST">
+                <input type="hidden" name="id" th:value="${pedido.id}" />
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+              </form>
+              <form action="/modificar" method="POST">
+                <input type="hidden" name="id" th:value="${pedido.id}" />
+                <button type="submit" class="btn btn-secondary">Modificar</button>
+              </form>
+            </div>
+          </td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

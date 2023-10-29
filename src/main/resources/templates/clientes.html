@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .container {
+            min-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark w-100">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-2" href="#">Mis Clientes</a>
+            <div class="d-flex">
+                <a href="/" class="btn btn-primary me-2">Inicio</a>
+                <a href="/clientes/nuevocliente" class="btn btn-primary me-2">Nuevo Cliente</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <table class="table table-hover m-3">
+            <thead>
+                <tr>
+                    <th class="col col-1">ID</th>
+                    <th class="col col-2">Nombre</th>
+                    <th class="col col-2">Telefono</th>
+                    <th class="col col-2">Direccion</th>
+                    <th class="col col-1 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="clientes : ${clientes} ">
+                    <td th:text="${clientes.id}"></td>
+                    <td th:text="${clientes.nombrecliente}"></td>
+                    <td th:text="${clientes.telefonocliente}"></td>
+                    <td th:text="${clientes.direccioncliente}"></td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <form action="/clientes/eliminar" method="POST">
+                                <input type="hidden" name="id" th:value="${clientes.id}" />
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                            <form action="/modificar" method="POST">
+                                <input type="hidden" name="id" th:value="${clientes.id}" />
+                                <button type="submit" class="btn btn-secondary">Modificar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
